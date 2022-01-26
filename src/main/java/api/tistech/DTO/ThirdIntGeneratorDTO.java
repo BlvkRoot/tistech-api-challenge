@@ -1,4 +1,4 @@
-package api.tistech.DTO;
+package api.tistech.dto;
 
 import lombok.Getter;
 import lombok.Setter;
