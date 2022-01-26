@@ -2,12 +2,18 @@ package api.tistech.services;
 
 import org.springframework.stereotype.Service;
 import api.tistech.dto.ThirdIntGeneratorDTO;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Service
 @NoArgsConstructor
+@Getter
+@Setter
 public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
     private String thirdIntegerC = "";
+
+    private Long thirdIntConverted;
 
     public Long execute(ThirdIntGeneratorDTO numbers) {
         String numberAToString = String.valueOf(numbers.getNumberA()),
@@ -50,11 +56,11 @@ public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
             }
         }
 
-        Long thirdIntConverted = Long.parseLong(thirdIntegerC);
+        this.setThirdIntConverted(Long.parseLong(thirdIntegerC));
 
         if (thirdIntConverted > 1_000_000L)
             return -1L;
 
-        return thirdIntConverted;
+        return this.getThirdIntConverted();
     }
 }

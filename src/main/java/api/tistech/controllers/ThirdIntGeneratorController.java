@@ -38,12 +38,11 @@ public class ThirdIntGeneratorController {
 	public String handle(@RequestBody ThirdIntGeneratorDTO numbers) {
 
 		try {
+			Long thirdIntCResult = thirdIntGeneratorService.execute(numbers);
 
-			thirdIntGeneratorService.execute(numbers);
-
-			return "{\"message\": \" This is the third-int-generator endpoint \"}";
+			return "{\"Result\": \""+ thirdIntCResult+ "\"}";
 		} catch (Exception e) {
-			return "{\"message\": \" \"" + e.getMessage() + "\"}";
+			return "{\"message\": \""+ e.getMessage() + "\"}";
 		}
 	}
 }
