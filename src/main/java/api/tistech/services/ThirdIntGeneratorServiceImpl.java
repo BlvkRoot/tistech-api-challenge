@@ -1,7 +1,5 @@
 package api.tistech.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import api.tistech.dto.ThirdIntGeneratorDTO;
 import lombok.NoArgsConstructor;
@@ -13,32 +11,49 @@ public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
 
     public Long execute(ThirdIntGeneratorDTO numbers) {
         String numberAToString = String.valueOf(numbers.getNumberA()),
-               numberBToString = String.valueOf(numbers.getNumberB());
+                numberBToString = String.valueOf(numbers.getNumberB());
         String[] numbersASplit = numberAToString.split(""),
-                 numbersBSplit = numberBToString.split("");
-        boolean isNumbersLengthEqual = numberAToString.length() == numberBToString.length();
+                numbersBSplit = numberBToString.split("");
+        int numbersALength = numbersASplit.length,
+                numbersBLength = numbersBSplit.length;
+        boolean isNumbersLengthEqual = numbersALength == numbersBLength;
 
         if (isNumbersLengthEqual) {
-            System.out.println("isNumbersLengthEqual === true");
             for (int i = 0; i < numbersASplit.length; i++) {
-                System.out.println("Numbers splitted:::::: " + numbersASplit[i]);
                 thirdIntegerC += numbersASplit[i];
                 thirdIntegerC += numbersBSplit[i];
             }
-
-            System.out.println("thirdNumberGenerated::: " + thirdIntegerC);
         }
 
         if (!isNumbersLengthEqual) {
-            System.out.println("isNumbersLengthEqual === false");
+            boolean isNumberALengthGreater = numbersALength > numbersBLength ? true : false;
+
+            if (isNumberALengthGreater) {
+                for (int i = 0; i < numbersBLength; i++) {
+                    thirdIntegerC += numbersASplit[i];
+                    thirdIntegerC += numbersBSplit[i];
+                }
+
+                for (int j = numbersBLength; j < numbersALength; j++) {
+                    thirdIntegerC += numbersASplit[j];
+                }
+
+            } else {
+                for (int i = 0; i < numbersALength; i++) {
+                    thirdIntegerC += numbersASplit[i];
+                    thirdIntegerC += numbersBSplit[i];
+                }
+
+                for (int j = numbersALength; j < numbersBLength; j++) {
+                    thirdIntegerC += numbersBSplit[j];
+                }
+            }
         }
 
         Long thirdIntConverted = Long.parseLong(thirdIntegerC);
 
         if (thirdIntConverted > 1_000_000L)
-            System.out.println("C greater than 1M");
-
-        System.out.println("Called Numbers: " + numbers.getNumberA() + " " + numbers.getNumberB());
+            return -1L;
 
         return thirdIntConverted;
     }
