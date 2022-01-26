@@ -12,7 +12,6 @@ import api.tistech.services.ThirdIntGeneratorService.IThirdIntGeneratorService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@RunWith(SpringRunner.class)
 public class ThirdIntGeneratorTests {
 
     @Autowired
