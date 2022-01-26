@@ -1,15 +1,17 @@
-package api.tistech.services;
+package api.tistech.services.ThirdIntGeneratorService;
 
 import org.springframework.stereotype.Service;
 import api.tistech.dto.ThirdIntGeneratorDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @NoArgsConstructor
 @Getter
 @Setter
+@Log4j2
 public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
     private String thirdIntegerC = "";
 
@@ -29,6 +31,9 @@ public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
                 thirdIntegerC += numbersASplit[i];
                 thirdIntegerC += numbersBSplit[i];
             }
+
+            log.info("Number A length is equal to Number B length \n" +
+                     "Result: " + this.thirdIntegerC);
         }
 
         if (!isNumbersLengthEqual) {
@@ -54,6 +59,9 @@ public class ThirdIntGeneratorServiceImpl implements IThirdIntGeneratorService {
                     thirdIntegerC += numbersBSplit[j];
                 }
             }
+
+            log.info("Number A length is different from Number B length \n" +
+                     "Result: " + this.thirdIntegerC);
         }
 
         this.setThirdIntConverted(Long.parseLong(thirdIntegerC));

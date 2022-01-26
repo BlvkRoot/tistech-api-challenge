@@ -3,11 +3,12 @@ package api.tistech.controllers;
 import api.tistech.dto.ThirdIntGeneratorDTO;
 import api.tistech.security.AccountCredentials;
 import api.tistech.security.JWTLoginFilter;
-import api.tistech.services.IThirdIntGeneratorService;
-import api.tistech.services.ThirdIntGeneratorServiceImpl;
+import api.tistech.services.ThirdIntGeneratorService.IThirdIntGeneratorService;
+import api.tistech.services.ThirdIntGeneratorService.ThirdIntGeneratorServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @Api
 @RequestMapping("")
+@Log4j2
 public class ThirdIntGeneratorController {
 	@Autowired
 	IThirdIntGeneratorService thirdIntGeneratorService;
@@ -40,8 +42,13 @@ public class ThirdIntGeneratorController {
 		try {
 			Long thirdIntCResult = thirdIntGeneratorService.execute(numbers);
 
-			return "{\"Result\": \""+ thirdIntCResult+ "\"}";
+			log.info("Third Int Result " + thirdIntCResult);
+
+			return "{\"Result\": \""+ thirdIntCResult + "\"}";
 		} catch (Exception e) {
+
+			log.info("Message: " + e.getMessage());
+
 			return "{\"message\": \""+ e.getMessage() + "\"}";
 		}
 	}

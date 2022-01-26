@@ -1,4 +1,4 @@
-package api.tistech.services;
+package api.tistech.services.ThirdIntGeneratorService;
 
 import api.tistech.dto.ThirdIntGeneratorDTO;
 
